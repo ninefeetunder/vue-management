@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import QS from 'qs'
+import QS from 'qs'
 
 axios.defaults.baseURL = 'https://www.hut-idea.top'
 
@@ -42,7 +42,7 @@ export function get (url, params) {
 // 封装post方法
 export function post (url, params) {
   return new Promise((resolve, reject) => {
-    axios.post(url, params)
+    axios.post(url, QS.stringify(params))
       .then(res => {
         resolve(res.data)
       })

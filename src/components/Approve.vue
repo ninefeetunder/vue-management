@@ -4,6 +4,13 @@
       :data="tableData"
       style="width: 100%">
       <el-table-column
+        label="ID"
+        width="300">
+        <template slot-scope="scope">
+          <span>{{scope.row.id}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
         label="认证图片"
         width="300">
         <template slot-scope="scope">
@@ -15,15 +22,15 @@
           <el-button
             size="mini"
             type="primary"
-            @click="handleApprove(scope.$index, scope.row)">认证</el-button>
+            @click="handleApproveSucc(scope.$index, scope.row)">认证</el-button>
             <el-button
             size="mini"
             type="danger"
-            @click="handleRejectApprove(scope.$index, scope.row)">拒绝</el-button>
+            @click="handleApproveFail(scope.$index, scope.row)">拒绝</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <!-- <Pagination></Pagination> -->
+    <Pagination @change-page="handleChangePage"></Pagination>
   </div>
 </template>
 
@@ -34,7 +41,8 @@ export default {
   name: 'approve',
   data () {
     return {
-      data: []
+      data: [],
+      currentPage: 1
     }
   },
   computed: {
@@ -48,42 +56,68 @@ export default {
         } else {
           obj.imgUrl = item.pics
         }
-        obj.id = item.user_id + ''
+        obj.id = item.id + ''
         filterList.push(obj)
       })
-      return filterList// 返回过滤完成的信息--数据为--(认证图片url--用户id)
+      return filterList// 返回过滤完成的信息--数据为--(认证图片url--认证id)
     }
   },
   created () {
-    get('/api/approve/all/1', { token: 'f7cb505f825455df5bbaad8cd180a8aa' })
-      .then((res) => {
-        // console.log(res)
-        if (res.code === 200) {
-          this.data = res.data
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getApproveData()
   },
   methods: {
-    handleApprove (index, rowObj) { // rowObj为tableData中对应的一个数据对象
-      console.log(rowObj.id)
-      let putObj = {
-        token: 'f7cb505f825455df5bbaad8cd180a8aa',
-        id: '8',
-        userId: rowObj.id
-      }
-      post('/api/approve/suc', putObj)
+    getApproveData () {
+      get('/api/approve/all/' + this.currentPage, { token: 'f7cb505f825455df5bbaad8cd180a8aa' })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
+          if (res.code === 200) {
+            this.data = res.data
+          }
         })
         .catch((err) => {
-          console.log(err)
+          console.log('数据获取失败', err)
         })
     },
-    handleRejectApprove (index, rowObj) {
-
+    handleApproveSucc (index, rowObj) { // rowObj为tableData中对应的一个数据对象
+      let putObj = {
+        token: 'f7cb505f825455df5bbaad8cd180a8aa',
+        id: rowObj.id,
+        userId: '8',
+        '_method': 'put'
+      }
+      post('api/approve/suc', putObj)
+        .then((res) => {
+          this.tableData.splice(index, 1)
+          this.$notify({
+            title: '认证成功',
+            type: 'success'
+          })
+        })
+        .catch((err) => {
+          console.log('成功认证请求失败', err)
+        })
+    },
+    handleApproveFail (index, rowObj) {
+      let putObj = {
+        token: 'f7cb505f825455df5bbaad8cd180a8aa',
+        id: rowObj.id,
+        '_method': 'put'
+      }
+      post('/api/approve/fail', putObj)
+        .then(res => {
+          console.log(res) // 带处理
+          this.$notify({
+            title: '拒绝认证成功',
+            type: 'success'
+          })
+        })
+        .catch(err => {
+          console.log('拒绝认证请求失败', err)
+        })
+    },
+    handleChangePage (pageIndex) {
+      this.currentPage = pageIndex
+      this.getApproveData()
     }
   },
   components: {
