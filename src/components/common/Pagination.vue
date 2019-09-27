@@ -4,7 +4,7 @@
       @current-change="handleCurrentChange"
       :page-size="10"
       layout="prev, pager, next, jumper"
-      :total="100">
+      :total="10000">
     </el-pagination>
   </div>
 </template>
@@ -22,5 +22,8 @@ export default {
 
 <style lang="stylus" scoped>
 .pagination-wrapper
-  padding: 20px 0
+  padding: 10px 0
+  position: fixed
+  left: 250px
+  bottom: 10px
 </style>

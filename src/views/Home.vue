@@ -97,7 +97,7 @@ export default {
   padding: 15px
   position: fixed
   top: 50px
-  bottom: 0
+  bottom: 45px
   left: 250px
   right: 0
 
