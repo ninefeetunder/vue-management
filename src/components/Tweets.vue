@@ -59,7 +59,7 @@
             type="danger"
             @click="handleTweetDelete(scope.$index, scope.row)">删除</el-button>
         </template>
-    </el-table-column>
+      </el-table-column>
     </el-table>
     <Pagination @change-page="handleChangePage"></Pagination>
     <Gallery v-if="showGallery" :imgList="imgList" @close="handleCloseGallery"></Gallery>
@@ -99,7 +99,9 @@ export default {
           label: '发布时间',
           prop: 'time'
         }
-      ]
+      ],
+      token: localStorage.getItem('token'),
+      id: localStorage.getItem('id') // 管理员id
     }
   },
   computed: {
@@ -134,7 +136,7 @@ export default {
   },
   methods: {
     getTweetsData () {
-      get('/api/talk/' + this.currentPage, { token: 'f7cb505f825455df5bbaad8cd180a8aa' })
+      get('/api/talk/' + this.currentPage, { token: this.token })
         .then(res => {
           console.log(res)
           this.dataList = res.data
@@ -143,11 +145,11 @@ export default {
           console.log('说说信息获取失败' + err)
         })
     },
-    handleTweetDelete (index, obj) {
+    handleTweetDelete (index, item) {
       let requestObj = {
-        token: 'f7cb505f825455df5bbaad8cd180a8aa',
-        userId: '8',
-        id: obj.tweetId
+        token: this.token,
+        userId: this.id,
+        id: item.tweetId
       }
       get('/api/talk/delete', requestObj)
         .then(res => {

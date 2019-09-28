@@ -17,6 +17,13 @@
           <img class="approve-img" :src="scope.row.imgUrl" alt="">
         </template>
       </el-table-column>
+      <el-table-column
+        label="时间"
+        width="300">
+        <template slot-scope="scope">
+          <span>{{scope.row.time}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
@@ -42,7 +49,9 @@ export default {
   data () {
     return {
       data: [],
-      currentPage: 1
+      currentPage: 1,
+      token: localStorage.getItem('token'),
+      id: localStorage.getItem('id') // 管理员id
     }
   },
   computed: {
@@ -57,6 +66,7 @@ export default {
           obj.imgUrl = item.pics
         }
         obj.id = item.id + ''
+        obj.time = item.time
         filterList.push(obj)
       })
       return filterList// 返回过滤完成的信息--数据为--(认证图片url--认证id)
@@ -67,9 +77,9 @@ export default {
   },
   methods: {
     getApproveData () {
-      get('/api/approve/all/' + this.currentPage, { token: 'f7cb505f825455df5bbaad8cd180a8aa' })
+      get('/api/approve/all/' + this.currentPage, { token: this.token })
         .then((res) => {
-          // console.log(res)
+          console.log(res)
           if (res.code === 200) {
             this.data = res.data
           }
@@ -80,9 +90,9 @@ export default {
     },
     handleApproveSucc (index, rowObj) { // rowObj为tableData中对应的一个数据对象
       let putObj = {
-        token: 'f7cb505f825455df5bbaad8cd180a8aa',
+        token: this.token,
         id: rowObj.id,
-        userId: '8',
+        userId: this.id,
         '_method': 'put'
       }
       post('api/approve/suc', putObj)
@@ -99,7 +109,7 @@ export default {
     },
     handleApproveFail (index, rowObj) {
       let putObj = {
-        token: 'f7cb505f825455df5bbaad8cd180a8aa',
+        token: this.token,
         id: rowObj.id,
         '_method': 'put'
       }

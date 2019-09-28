@@ -3,8 +3,22 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+let token = localStorage.getItem('token')
+let id = localStorage.getItem('id')
+let headPic = localStorage.getItem('headPic')
+let username = localStorage.getItem('username')
+
 export default new Vuex.Store({
   state: {
-    token: 'f7cb505f825455df5bbaad8cd180a8aa'
+    token: token,
+    userHeadPic: headPic,
+    username: username,
+    id: id
+  },
+  mutations: {
+    getUserInfo (state, userInfo) {
+      state.userHeadPic = userInfo.headPic
+      state.username = userInfo.username
+    }
   }
 })

@@ -12,6 +12,20 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (store.state.token) {
+      next()
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    next()
+  }
+})
+
 new Vue({
   router,
   store,

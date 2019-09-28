@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { post } from '../request/http'
 export default {
   name: 'login',
   data () {
@@ -28,7 +29,38 @@ export default {
   },
   methods: {
     handleLogin () {
-      console.log(this.loginForm)
+      let username = this.loginForm.name.trim()
+      let password = this.loginForm.psw.trim()
+      if (!username || !password) {
+        this.$message({
+          message: '用户名或密码不能为空',
+          type: 'warning'
+        })
+        return ''
+      }
+      let userInfo = {
+        username,
+        password
+      }
+      post('api/token/login', userInfo)
+        .then((res) => {
+          if (res.code === 400) {
+            this.$message({
+              message: '用户名或密码不正确',
+              type: 'warning'
+            })
+          } else if (res.code === 200) {
+            res = res.data
+            localStorage.setItem('token', res.token)
+            localStorage.setItem('id', res.id)
+            localStorage.setItem('username', res.username)
+            localStorage.setItem('headPic', res.headPic)
+            this.$router.push('/home')
+          }
+        })
+        .catch((err) => {
+          console.log('登录出错', err)
+        })
     }
   }
 }

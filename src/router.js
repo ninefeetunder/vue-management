@@ -5,6 +5,8 @@ import Login from './views/Login'
 import Vistors from './components/Vistors'
 import Tweets from './components/Tweets'
 import Approve from './components/Approve'
+import Materials from './components/Materials'
+import Activity from './components/Activity'
 
 Vue.use(Router)
 
@@ -14,22 +16,29 @@ export default new Router({
   linkActiveClass: 'router-link-active',
   routes: [
     {
-      path: '/',
+      path: '/home',
       redirect: '/home/vistors'
     },
     {
       path: '/login',
-      component: Login
+      component: Login,
+      name: 'login'
     },
     {
       path: '/home',
       component: Home,
       name: 'home',
+      meta: {
+        requireAuth: true
+      },
       children: [ // 子路由必须也得加上 { requireAuth: true }
         {
           path: 'vistors',
           component: Vistors,
-          name: 'vistors'
+          name: 'vistors',
+          meta: {
+            requireAuth: true
+          }
         },
         {
           path: 'tweets',
@@ -42,7 +51,20 @@ export default new Router({
         {
           path: 'approve',
           component: Approve,
-          name: 'approve'
+          name: 'approve',
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'materials',
+          component: Materials,
+          name: 'materials'
+        },
+        {
+          path: 'activity',
+          component: Activity,
+          name: 'activity'
         }
       ]
     }
