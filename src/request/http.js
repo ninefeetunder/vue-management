@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'https://www.hut-idea.top'
 
 axios.defaults.timeout = 10000
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 // 请求拦截
 // axios.interceptors.request.use(

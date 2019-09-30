@@ -55,7 +55,7 @@ export default {
             localStorage.setItem('id', res.id)
             localStorage.setItem('username', res.username)
             localStorage.setItem('headPic', res.headPic)
-            this.$router.push('/home')
+            this.$router.push('/home/vistors')
           }
         })
         .catch((err) => {

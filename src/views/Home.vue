@@ -49,7 +49,7 @@ export default {
         { content: '资料控制', route: '/home/materials', id: 2 },
         { content: '用户认证', route: '/home/approve', id: 3 },
         { content: '社团活动', route: '/home/activity', id: 4 },
-        { content: '系统消息', route: '', id: 5 }
+        { content: '系统消息', route: '/home/message', id: 5 }
       ]
     }
   },

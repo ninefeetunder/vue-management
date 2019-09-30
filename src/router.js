@@ -7,6 +7,7 @@ import Tweets from './components/Tweets'
 import Approve from './components/Approve'
 import Materials from './components/Materials'
 import Activity from './components/Activity'
+import Message from './components/Message'
 
 Vue.use(Router)
 
@@ -16,7 +17,7 @@ export default new Router({
   linkActiveClass: 'router-link-active',
   routes: [
     {
-      path: '/home',
+      path: '/',
       redirect: '/home/vistors'
     },
     {
@@ -65,6 +66,11 @@ export default new Router({
           path: 'activity',
           component: Activity,
           name: 'activity'
+        },
+        {
+          path: 'message',
+          component: Message,
+          name: 'message'
         }
       ]
     }

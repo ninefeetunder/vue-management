@@ -8,4 +8,8 @@
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
+  .option-button // 右下角按钮样式
+    position: fixed
+    right: 30px
+    bottom: 15px
 </style>

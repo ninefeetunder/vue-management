@@ -107,11 +107,11 @@ export default {
       }
       post('api/data', deleteData)
         .then(res => {
-          console.log(res)
-          // this.$notify({
-          //   title: '删除成功',
-          //   type: 'success'
-          // })
+          this.materialsData.splice(index, 1)
+          this.$notify({
+            title: '删除成功',
+            type: 'success'
+          })
         })
         .catch(err => {
           console.log(err)
@@ -133,4 +133,7 @@ export default {
   display: block
 .materials >>> .el-form-item__label
   font-weight: 900
+.materials
+  height: 100%
+  overflow: auto
 </style>
