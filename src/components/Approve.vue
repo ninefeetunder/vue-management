@@ -43,6 +43,7 @@
 
 <script>
 import { get, post } from '../request/http'
+import { mapState } from 'vuex'
 import Pagination from '../components/common/Pagination'
 export default {
   name: 'approve',
@@ -50,11 +51,11 @@ export default {
     return {
       data: [],
       currentPage: 1,
-      token: localStorage.getItem('token'),
-      id: localStorage.getItem('id') // 管理员id
+      msg: '' // 拒绝认证msg
     }
   },
   computed: {
+    ...mapState(['id', 'token']),
     tableData () {
       let filterList = []
       // 过滤信息
@@ -79,7 +80,7 @@ export default {
     getApproveData () {
       get('/api/approve/all/' + this.currentPage, { token: this.token })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.code === 200) {
             this.data = res.data
           }
@@ -108,21 +109,31 @@ export default {
         })
     },
     handleApproveFail (index, rowObj) {
-      let putObj = {
-        token: this.token,
-        id: rowObj.id,
-        '_method': 'put'
-      }
-      post('/api/approve/fail', putObj)
-        .then(res => {
-          console.log(res) // 带处理
-          this.$notify({
-            title: '拒绝认证成功',
-            type: 'success'
-          })
-        })
-        .catch(err => {
-          console.log('拒绝认证请求失败', err)
+      this.$prompt('请输入拒绝理由', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      })
+        .then(({ value }) => {
+          this.msg = value
+          let putObj = {
+            token: this.token,
+            id: rowObj.id,
+            msg: this.msg,
+            userId: this.id,
+            '_method': 'put'
+          }
+          console.log(this.token)
+          post('/api/approve/fail', putObj)
+            .then(res => {
+              this.$notify({
+                title: '拒绝认证成功',
+                type: 'success'
+              })
+              this.tableData.splice(index, 1)
+            })
+            .catch(err => {
+              console.log('拒绝认证请求失败', err)
+            })
         })
     },
     handleChangePage (pageIndex) {

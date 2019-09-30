@@ -36,17 +36,20 @@
       </el-table-column>
     </el-table>
     <el-button type="primary" class="option-button" round @click.native="handleOpenForm">推送消息</el-button>
+    <message-form v-if="showForm" @upload-succ="handleCloseForm"></message-form>
   </div>
 </template>
 
 <script>
 import { get, post } from '../request/http'
+import MessageForm from './common/MessageForm'
 import { mapState } from 'vuex'
 export default {
   name: 'message',
   data () {
     return {
-      dataList: []
+      dataList: [],
+      showForm: false
     }
   },
   computed: {
@@ -91,12 +94,23 @@ export default {
               title: '删除成功',
               type: 'success'
             })
+            this.getMessageData()
           }
         })
         .catch(err => {
           console.log('消息删除失败', err)
         })
+    },
+    handleOpenForm () {
+      this.showForm = true
+    },
+    handleCloseForm () {
+      this.showForm = false
+      this.getMessageData()
     }
+  },
+  components: {
+    MessageForm
   }
 }
 </script>

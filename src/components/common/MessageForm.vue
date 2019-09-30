@@ -2,14 +2,8 @@
   <div class="form-container">
     <div class="submit-form">
       <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-        <el-form-item label="名称">
-          <el-input v-model="formLabelAlign.name"></el-input>
-        </el-form-item>
-        <el-form-item label="活动区域">
-          <el-input v-model="formLabelAlign.region"></el-input>
-        </el-form-item>
-        <el-form-item label="活动描述">
-          <el-input v-model="formLabelAlign.descripe"></el-input>
+        <el-form-item label="消息内容">
+          <el-input v-model="formLabelAlign.content"></el-input>
         </el-form-item>
         <el-form-item label="上传活动图片">
           <div class="upload-container">
@@ -20,7 +14,7 @@
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button type="primary" @click="onSubmit">发布消息</el-button>
           <el-button @click="$emit('upload-succ')">取消</el-button>
         </el-form-item>
       </el-form>
@@ -33,21 +27,19 @@ import { post } from '../../request/http'
 import { mapState } from 'vuex'
 import axios from 'axios'
 export default {
-  name: 'submitform',
+  name: 'MessageForm',
   data () {
     return {
       labelPosition: 'top',
       uploadPics: '',
       formLabelAlign: {
-        name: '',
-        region: '',
-        descripe: ''
+        content: ''
       }
     }
   },
   computed: {
     ...mapState({
-      userId: 'id',
+      id: 'id',
       token: 'token'
     })
   },
@@ -68,26 +60,24 @@ export default {
         })
     },
     onSubmit () {
-      if (!this.formLabelAlign.name || !this.formLabelAlign.region || !this.formLabelAlign.descripe || !this.uploadPics) {
+      if (!this.formLabelAlign.content) {
         this.$message({
-          message: '请输入正确的活动信息',
+          message: '请输入正确的信息内容',
           type: 'warning'
         })
         return ''
       } else {
         const obj = {
           token: this.token,
-          userId: this.userId,
-          name: this.formLabelAlign.name.trim(),
-          place: this.formLabelAlign.region.trim(),
-          descripe: this.formLabelAlign.descripe,
+          id: this.id,
+          content: this.formLabelAlign.content.trim(),
           pics: this.uploadPics
         }
-        post('/api/activity', obj)
+        post('/api/push', obj)
           .then((res) => {
             if (res.code == 200) {
               this.$notify({
-                title: '活动发布成功',
+                title: '信息发布成功',
                 type: 'success'
               })
               this.$emit('upload-succ')

@@ -51,12 +51,11 @@ export default {
   background: rgba(0,0,0,.7)
   z-index: 999
   .gallery
-    width: 500px
-    height: 400px
+    width: 600px
     position: absolute
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
     .show-img
-      height: 100%
+      width: 100%
 </style>
