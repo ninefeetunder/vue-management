@@ -138,7 +138,7 @@ export default {
     getTweetsData () {
       get('/api/talk/' + this.currentPage, { token: this.token })
         .then(res => {
-          console.log(res)
+          // console.log(res)
           this.dataList = res.data
         })
         .catch(err => {
