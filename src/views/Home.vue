@@ -9,7 +9,6 @@
           你好, {{ username }} ~~
         </div>
       </div>
-      <input type="text" class="search" placeholder="Search">
       <a href="#" class="logout" @click="handleLogout">注销</a>
     </nav>
 
@@ -80,6 +79,7 @@ export default {
   display: flex
   height: 50px
   background: #222f3e
+  justify-content: space-between
   position: fixed
   top: 0
   left: 0
@@ -113,12 +113,6 @@ export default {
     display: flex
     align-items: center
     font-size: 14px
-  .search
-    border: none
-    outline: none
-    flex: 1
-    padding: 20px
-    background: #576574
 .aside-container
   position: fixed
   left: 0
