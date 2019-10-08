@@ -8,7 +8,7 @@
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item>
               <div>
-                <h3>发布内容</h3>
+                <h3>发布内容: </h3>
                 <div class="tweet-content">
                   {{props.row.allContent | contentTesting}}
                 </div>
@@ -16,7 +16,7 @@
             </el-form-item>
             <el-form-item>
               <div>
-                <h3>图片</h3>
+                <h3>图片: </h3>
                 <div class="tweetimg-container">
                   <img
                     class="tweet-img"
@@ -31,7 +31,7 @@
             </el-form-item>
             <el-form-item>
               <div>
-                <h3>评论</h3>
+                <h3>评论: </h3>
                 <div class="talks-container">
                   <p
                     v-for="(item, index) in props.row.talks"
@@ -68,6 +68,7 @@
 
 <script>
 import { get } from '../request/http'
+import { mapState } from 'vuex'
 import Pagination from './common/Pagination'
 import Gallery from './common/Gallery'
 export default {
@@ -99,12 +100,11 @@ export default {
           label: '发布时间',
           prop: 'time'
         }
-      ],
-      token: localStorage.getItem('token'),
-      id: localStorage.getItem('id') // 管理员id
+      ]
     }
   },
   computed: {
+    ...mapState(['id', 'token']),
     tweetsData () {
       let filterDataList = []
       this.dataList.forEach(item => {

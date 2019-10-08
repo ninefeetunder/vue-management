@@ -10,15 +10,21 @@ let username = localStorage.getItem('username')
 
 export default new Vuex.Store({
   state: {
-    token: token,
+    token,
     userHeadPic: headPic,
-    username: username,
-    id: id
+    username,
+    id
   },
   mutations: {
     getUserInfo (state, userInfo) {
       state.userHeadPic = userInfo.headPic
       state.username = userInfo.username
+    },
+    clearUserInfo (state) {
+      state.token = ''
+      state.id = ''
+      state.headPic = ''
+      state.username = ''
     }
   }
 })

@@ -11,6 +11,11 @@ import Message from './components/Message'
 
 Vue.use(Router)
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 export default new Router({
   mode: 'hash',
   base: '/',
@@ -60,17 +65,26 @@ export default new Router({
         {
           path: 'materials',
           component: Materials,
-          name: 'materials'
+          name: 'materials',
+          meta: {
+            requireAuth: true
+          }
         },
         {
           path: 'activity',
           component: Activity,
-          name: 'activity'
+          name: 'activity',
+          meta: {
+            requireAuth: true
+          }
         },
         {
           path: 'message',
           component: Message,
-          name: 'message'
+          name: 'message',
+          meta: {
+            requireAuth: true
+          }
         }
       ]
     }

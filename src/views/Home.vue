@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'home',
   data () {
@@ -57,12 +57,11 @@ export default {
       this.$router.push(route)
     },
     handleLogout () {
-      localStorage.removeItem('token')
-      localStorage.removeItem('id')
-      localStorage.removeItem('headPic')
-      localStorage.removeItem('username')
+      localStorage.clear()
+      this.clearUserInfo()
       this.$router.replace({ name: 'login' })
-    }
+    },
+    ...mapMutations(['clearUserInfo'])
   },
   computed: {
     ...mapState(['userHeadPic', 'username'])
@@ -98,7 +97,7 @@ export default {
       width: 40px
       height: 40px
       border-radius: 50%
-      background: url('http://b-ssl.duitang.com/uploads/item/201608/21/20160821230024_MyCYK.thumb.700_0.jpeg') no-repeat
+      background: url('https://i.loli.net/2019/10/08/3q9TSNDPux6iUfv.jpg') no-repeat
       background-size: cover
       .head-img
         height: 100%

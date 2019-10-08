@@ -4,22 +4,25 @@
       :data="tableData"
       style="width: 100%">
       <el-table-column
-        label="ID"
-        width="300">
+        label="ID">
         <template slot-scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
       <el-table-column
-        label="认证图片"
-        width="300">
+        label="用户头像">
+        <template slot-scope="scope">
+          <img class="avatar" :src="scope.row.bgPic" alt="">
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="认证图片">
         <template slot-scope="scope">
           <img class="approve-img" :src="scope.row.imgUrl" alt="">
         </template>
       </el-table-column>
       <el-table-column
-        label="时间"
-        width="300">
+        label="时间">
         <template slot-scope="scope">
           <span>{{scope.row.time}}</span>
         </template>
@@ -66,7 +69,9 @@ export default {
         } else {
           obj.imgUrl = item.pics
         }
-        obj.id = item.id + ''
+        obj.id = item.id
+        obj.user_id = item.user_id
+        obj.bgPic = item.user.bgPic
         obj.time = item.time
         filterList.push(obj)
       })
@@ -93,7 +98,7 @@ export default {
       let putObj = {
         token: this.token,
         id: rowObj.id,
-        userId: this.id,
+        userId: rowObj.user_id,
         '_method': 'put'
       }
       post('api/approve/suc', putObj)
@@ -119,7 +124,7 @@ export default {
             token: this.token,
             id: rowObj.id,
             msg: this.msg,
-            userId: this.id,
+            userId: rowObj.user_id,
             '_method': 'put'
           }
           console.log(this.token)
@@ -134,6 +139,9 @@ export default {
             .catch(err => {
               console.log('拒绝认证请求失败', err)
             })
+        })
+        .catch((err) => {
+          console.log('取消成功', err)
         })
     },
     handleChangePage (pageIndex) {
@@ -152,6 +160,10 @@ export default {
   height: 100%
   overflow: auto
   box-sizing: border-box
+  .avatar
+    width: 50px
+    height: 50px
+    border-radius: 100%
   .approve-img
     height: 100px
 </style>

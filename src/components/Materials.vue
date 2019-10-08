@@ -6,22 +6,22 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="上传用户">
+            <el-form-item label="上传用户: ">
                 <span>{{ props.row.username }}</span>
             </el-form-item>
-            <el-form-item label="考试名称">
+            <el-form-item label="考试名称: ">
               <span>{{ props.row.name }}</span>
             </el-form-item>
-            <el-form-item label="资料类型">
+            <el-form-item label="资料类型: ">
               <span>{{ props.row.type }}</span>
             </el-form-item>
-            <el-form-item label="资料链接">
+            <el-form-item label="资料链接: ">
               <span>{{ props.row.url }}</span>
             </el-form-item>
-            <el-form-item label="提取密码">
+            <el-form-item label="提取密码: ">
               <span>{{ props.row.secret }}</span>
             </el-form-item>
-            <el-form-item label="资料详情">
+            <el-form-item label="资料详情: ">
               <span>{{ props.row.details }}</span>
             </el-form-item>
           </el-form>
@@ -54,18 +54,18 @@
 
 <script>
 import { get, post } from '../request/http'
+import { mapState } from 'vuex'
 import Pagination from './common/Pagination'
 export default {
   name: 'materials',
   data () {
     return {
       dataList: [],
-      currentPage: 1,
-      token: localStorage.getItem('token'),
-      id: localStorage.getItem('id')
+      currentPage: 1
     }
   },
   computed: {
+    ...mapState(['id', 'token']),
     materialsData () {
       let list = []
       this.dataList.forEach((item) => {

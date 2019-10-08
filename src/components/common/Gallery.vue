@@ -51,7 +51,7 @@ export default {
   background: rgba(0,0,0,.7)
   z-index: 999
   .gallery
-    width: 600px
+    width: 500px
     position: absolute
     top: 50%
     left: 50%

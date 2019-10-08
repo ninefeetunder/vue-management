@@ -55,7 +55,8 @@ export default {
             localStorage.setItem('id', res.id)
             localStorage.setItem('username', res.username)
             localStorage.setItem('headPic', res.headPic)
-            this.$router.push('/home/vistors')
+            console.log('处理成功')
+            this.$router.push('/')
           }
         })
         .catch((err) => {

@@ -35,15 +35,15 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-button type="primary" class="option-button" round @click.native="handleOpenForm">推送消息</el-button>
+    <el-button type="primary" class="option-button" @click.native="handleOpenForm">推送消息</el-button>
     <message-form v-if="showForm" @upload-succ="handleCloseForm"></message-form>
   </div>
 </template>
 
 <script>
 import { get, post } from '../request/http'
-import MessageForm from './common/MessageForm'
 import { mapState } from 'vuex'
+import MessageForm from './common/MessageForm'
 export default {
   name: 'message',
   data () {

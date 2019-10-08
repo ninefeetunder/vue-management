@@ -46,13 +46,14 @@
       </el-table-column>
     </el-table>
     <Pagination @change-page="handleChangePage"></Pagination>
-    <el-button type="primary" class="option-button" round @click.native="handleOpenForm">发布活动</el-button>
+    <el-button type="primary" class="option-button" @click.native="handleOpenForm">发布活动</el-button>
     <submit-form v-if="showForm" @upload-succ="handleCloseForm"></submit-form>
   </div>
 </template>
 
 <script>
 import { get, post } from '../request/http'
+import { mapState } from 'vuex'
 import Pagination from './common/Pagination'
 import SubmitForm from './common/SubmitForm'
 export default {
@@ -61,7 +62,6 @@ export default {
     return {
       activityList: [],
       currentPage: 1,
-      token: localStorage.getItem('token'),
       showForm: false
     }
   },
@@ -69,6 +69,7 @@ export default {
     this.getActivityData()
   },
   computed: {
+    ...mapState(['token']),
     activityData () {
       const dataList = []
       this.activityList.forEach((item) => {
