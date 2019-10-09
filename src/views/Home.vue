@@ -27,6 +27,28 @@
           <i class="el-icon-menu"></i>
           <span slot="title">{{item.content}}</span>
         </el-menu-item>
+        <!-- 下拉菜单 -->
+        <el-submenu
+          v-for="slideItem in slideMenuList"
+          :key="slideItem.id"
+          index="6"
+        >
+          <template slot="title">
+            <i class="el-icon-menu"></i>
+            <span>{{slideItem.content}}</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item
+              v-for="subItem in slideItem.children"
+              :index="subItem.route"
+              :key="subItem.id"
+              @click.native="handleClick(subItem.route)"
+            >
+              <i class="el-icon-s-platform"></i>
+              <span slot="title">{{ subItem.content }}</span>
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </aside>
     <!-- 侧边栏显示的内容 -->
@@ -46,9 +68,31 @@ export default {
         { content: '访问人数', route: '/home/vistors', id: 0 },
         { content: '说说控制', route: '/home/tweets', id: 1 },
         { content: '资料控制', route: '/home/materials', id: 2 },
-        { content: '用户认证', route: '/home/approve', id: 3 },
         { content: '社团活动', route: '/home/activity', id: 4 },
         { content: '系统消息', route: '/home/message', id: 5 }
+      ],
+      slideMenuList: [
+        {
+          content: '认证相关',
+          id: 6,
+          children: [
+            {
+              content: '用户认证',
+              route: '/home/approve',
+              id: 7
+            },
+            {
+              content: '成功认证',
+              route: '/home/approvesucc',
+              id: 8
+            },
+            {
+              content: '失败认证',
+              route: '/home/approvefail',
+              id: 9
+            }
+          ]
+        }
       ]
     }
   },
@@ -119,7 +163,8 @@ export default {
   bottom: 0
   width: 250px
   padding-top: 5px
-  border-right: solid 1px #e6e6e6;
+  border-right: solid 1px #e6e6e6
+  overflow: auto
 .content-container
   padding: 15px
   position: fixed

@@ -2,7 +2,7 @@
   <div class="pagination-wrapper">
     <el-pagination
       @current-change="handleCurrentChange"
-      :page-size="10"
+      :page-size="20"
       layout="prev, pager, next, jumper"
       :total="10000">
     </el-pagination>

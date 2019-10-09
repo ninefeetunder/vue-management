@@ -5,6 +5,8 @@ import Login from './views/Login'
 import Vistors from './components/Vistors'
 import Tweets from './components/Tweets'
 import Approve from './components/Approve'
+import ApproveSucc from './components/ApproveSucc'
+import ApproveFail from './components/ApproveFail'
 import Materials from './components/Materials'
 import Activity from './components/Activity'
 import Message from './components/Message'
@@ -58,6 +60,22 @@ export default new Router({
           path: 'approve',
           component: Approve,
           name: 'approve',
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'approvesucc', // 查看认证成功页面
+          component: ApproveSucc,
+          name: 'approvesucc',
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'approvefail',
+          component: ApproveFail,
+          name: 'approvefail',
           meta: {
             requireAuth: true
           }

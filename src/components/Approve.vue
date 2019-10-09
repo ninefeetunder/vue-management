@@ -12,13 +12,13 @@
       <el-table-column
         label="用户头像">
         <template slot-scope="scope">
-          <img class="avatar" :src="scope.row.bgPic" alt="">
+          <img class="avatar" :src="scope.row.headPic" alt="">
         </template>
       </el-table-column>
       <el-table-column
         label="认证图片">
         <template slot-scope="scope">
-          <img class="approve-img" :src="scope.row.imgUrl" alt="">
+          <img class="approve-img" @click="showApproveImg(scope.row.imgUrl)" :src="scope.row.imgUrl" alt="">
         </template>
       </el-table-column>
       <el-table-column
@@ -41,6 +41,7 @@
       </el-table-column>
     </el-table>
     <Pagination @change-page="handleChangePage"></Pagination>
+    <Gallery v-if="showImg" @close="closeApproveImg" :imgList="imgList" />
   </div>
 </template>
 
@@ -48,13 +49,16 @@
 import { get, post } from '../request/http'
 import { mapState } from 'vuex'
 import Pagination from '../components/common/Pagination'
+import Gallery from './common/Gallery'
 export default {
   name: 'approve',
   data () {
     return {
       data: [],
       currentPage: 1,
-      msg: '' // 拒绝认证msg
+      msg: '', // 拒绝认证msg
+      showImg: false, // 控制Gallery组件显示
+      imgList: [] // 传递给Gallery组件的图片url数组
     }
   },
   computed: {
@@ -71,7 +75,7 @@ export default {
         }
         obj.id = item.id
         obj.user_id = item.user_id
-        obj.bgPic = item.user.bgPic
+        obj.headPic = item.user.headPic
         obj.time = item.time
         filterList.push(obj)
       })
@@ -147,10 +151,19 @@ export default {
     handleChangePage (pageIndex) {
       this.currentPage = pageIndex
       this.getApproveData()
+    },
+    showApproveImg (imgUrl) {
+      this.imgList.push(imgUrl)
+      this.showImg = true
+    },
+    closeApproveImg () {
+      this.imgList = []
+      this.showImg = false
     }
   },
   components: {
-    Pagination
+    Pagination,
+    Gallery
   }
 }
 </script>

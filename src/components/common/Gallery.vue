@@ -42,6 +42,9 @@ export default {
   height: 90%
   text-align: center
   color: #fff
+.gallery >>> .swiper-wrapper
+  display: flex
+  align-items: center
 .gallery-wrapper
   position: fixed
   top: 0
