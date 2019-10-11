@@ -135,5 +135,4 @@ export default {
   font-weight: 900
 .materials
   height: 100%
-  overflow: auto
 </style>

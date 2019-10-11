@@ -102,7 +102,6 @@ export default {
 <style lang="stylus" scoped>
   .approve_fail
     height: 100%
-    overflow: auto
     .avatar
       width: 50px
       height: 50px

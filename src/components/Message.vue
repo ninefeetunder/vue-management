@@ -121,7 +121,5 @@ export default {
 .message >>> .el-form-item__label
   font-weight: 900
 .message
-  width: 100%
   height: 100%
-  overflow: auto
 </style>

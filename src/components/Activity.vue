@@ -142,9 +142,7 @@ export default {
 .activity >>> .el-form-item__label
   font-weight: 900
 .activity
-  width: 100%
   height: 100%
-  overflow: auto
   .activity-img
     height: 80px
     vertical-align: top

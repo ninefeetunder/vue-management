@@ -185,7 +185,6 @@ export default {
 <style lang="stylus" scoped>
 .tweets-info
   height: 100%
-  overflow: auto
   .demo-table-expand
     font-size: 0
     .el-form-item

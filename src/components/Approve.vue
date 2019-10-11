@@ -171,7 +171,6 @@ export default {
 <style lang="stylus" scoped>
 .approve-info
   height: 100%
-  overflow: auto
   box-sizing: border-box
   .avatar
     width: 50px

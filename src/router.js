@@ -10,6 +10,7 @@ import ApproveFail from './components/ApproveFail'
 import Materials from './components/Materials'
 import Activity from './components/Activity'
 import Message from './components/Message'
+import Shield from './components/Shield'
 
 Vue.use(Router)
 
@@ -100,6 +101,14 @@ export default new Router({
           path: 'message',
           component: Message,
           name: 'message',
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'shield',
+          component: Shield,
+          name: 'shield',
           meta: {
             requireAuth: true
           }

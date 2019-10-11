@@ -31,7 +31,7 @@
         <el-submenu
           v-for="slideItem in slideMenuList"
           :key="slideItem.id"
-          index="6"
+          :index="slideItem.id"
         >
           <template slot="title">
             <i class="el-icon-menu"></i>
@@ -74,7 +74,7 @@ export default {
       slideMenuList: [
         {
           content: '认证相关',
-          id: 6,
+          id: '6',  // 组件的index必须是字符串
           children: [
             {
               content: '用户认证',
@@ -90,6 +90,17 @@ export default {
               content: '失败认证',
               route: '/home/approvefail',
               id: 9
+            }
+          ]
+        },
+        {
+          content: '控制面板',
+          id: '7',
+          children: [
+            {
+              content: '敏感字屏蔽',
+              route: '/home/shield',
+              id: 10
             }
           ]
         }
@@ -172,6 +183,7 @@ export default {
   bottom: 45px
   left: 250px
   right: 0
+  overflow: auto
 
 @media screen and (max-width: 768px)
   .aside-container
