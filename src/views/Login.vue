@@ -12,11 +12,13 @@
       </el-form-item>
        <el-button type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
+    <Canvas />
   </div>
 </template>
 
 <script>
 import { post } from '../request/http'
+import Canvas from '../components/common/Canvas'
 export default {
   name: 'login',
   data () {
@@ -63,6 +65,9 @@ export default {
           console.log('登录出错', err)
         })
     }
+  },
+  components: {
+    Canvas
   }
 }
 </script>
@@ -78,7 +83,7 @@ export default {
   bottom: 0
   background-image: linear-gradient(to top, #99acbe 5%, #a8b3bf 20%, #cfd7dd)
   .login-form
-    width: 420px
+    width: 380px
     padding: 20px
     border-radius: 8px
     background: #ffffff
@@ -87,6 +92,7 @@ export default {
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
+    opacity: .9
     .title-container
       line-height: 30px
       text-align: center

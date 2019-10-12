@@ -89,7 +89,7 @@ export default {
       }
       post('api/push', deleteObj)
         .then(res => {
-          if (res.code == 200) {
+          if (res.code === 200) {
             this.$notify({
               title: '删除成功',
               type: 'success'

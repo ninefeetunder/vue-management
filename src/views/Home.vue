@@ -53,13 +53,16 @@
     </aside>
     <!-- 侧边栏显示的内容 -->
     <main class="content-container">
-      <router-view></router-view>
+      <Animation>
+        <router-view></router-view>
+      </Animation>
     </main>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import Animation from '../components/common/Animation'
 export default {
   name: 'home',
   data () {
@@ -74,7 +77,7 @@ export default {
       slideMenuList: [
         {
           content: '认证相关',
-          id: '6',  // 组件的index必须是字符串
+          id: '6', // 组件的index必须是字符串
           children: [
             {
               content: '用户认证',
@@ -120,6 +123,9 @@ export default {
   },
   computed: {
     ...mapState(['userHeadPic', 'username'])
+  },
+  components: {
+    Animation
   }
 }
 </script>
@@ -152,7 +158,7 @@ export default {
       width: 40px
       height: 40px
       border-radius: 50%
-      background: url('https://i.loli.net/2019/10/08/3q9TSNDPux6iUfv.jpg') no-repeat
+      background: url('https://c-ssl.duitang.com/uploads/item/201505/06/20150506213201_SsGic.thumb.700_0.jpeg') no-repeat center center
       background-size: cover
       .head-img
         height: 100%

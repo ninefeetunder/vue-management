@@ -25,5 +25,5 @@ export default {
   padding: 10px 0
   position: fixed
   left: 250px
-  bottom: 10px
+  bottom: 0
 </style>
