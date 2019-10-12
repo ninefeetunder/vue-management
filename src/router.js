@@ -22,7 +22,6 @@ Router.prototype.push = function push (location) {
 export default new Router({
   mode: 'hash',
   base: '/',
-  linkActiveClass: 'router-link-active',
   routes: [
     {
       path: '/',

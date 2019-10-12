@@ -117,7 +117,8 @@ export default {
     handleLogout () {
       localStorage.clear()
       this.clearUserInfo()
-      this.$router.replace({ name: 'login' })
+      console.log(1)
+      this.$router.replace('/login')
     },
     ...mapMutations(['clearUserInfo'])
   },
