@@ -11,5 +11,5 @@
   .option-button // 右下角按钮样式
     position: fixed
     right: 30px
-    bottom: 15px
+    bottom: 3px
 </style>

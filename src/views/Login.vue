@@ -19,6 +19,7 @@
 <script>
 import { post } from '../request/http'
 import Canvas from '../components/common/Canvas'
+import { mapMutations } from 'vuex'
 export default {
   name: 'login',
   data () {
@@ -57,14 +58,15 @@ export default {
             localStorage.setItem('id', res.id)
             localStorage.setItem('username', res.username)
             localStorage.setItem('headPic', res.headPic)
-            console.log('处理成功')
-            this.$router.push('/')
+            this.initStateValue() // 给store中state的数据赋值
+            this.$router.push('/home/vistors')
           }
         })
         .catch((err) => {
           console.log('登录出错', err)
         })
-    }
+    },
+    ...mapMutations(['initStateValue'])
   },
   components: {
     Canvas

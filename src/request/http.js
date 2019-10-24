@@ -2,29 +2,14 @@ import axios from 'axios'
 import QS from 'qs'
 
 axios.defaults.baseURL = 'https://www.hut-idea.top'
-
 axios.defaults.timeout = 10000
 
+// 处理上传的axios对象
+const uploadServe = axios.create({
+  baseURL: 'https://www.hut-idea.top',
+  timeout: 5000
+})
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-
-// 请求拦截
-// axios.interceptors.request.use(
-//   config => {
-//     const token = store.state.token
-//     token && (config.headers.Authorization = token)
-//     return config
-//   },
-//   error => {
-//     return Promise.error(error)
-//   }
-// )
-
-// 相应拦截
-// axios.interceptors.response.use(
-//   config => {
-
-//   }
-// )
 
 // 封装get方法
 export function get (url, params) {
@@ -47,6 +32,20 @@ export function post (url, params) {
         resolve(res.data)
       })
       .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+// 封装上传文件的方法
+export function uploadFile (url, params, config = {}) {
+  return new Promise((resolve, reject) => {
+    uploadServe.post(url, params, config)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        console.log(err)
         reject(err)
       })
   })

@@ -29,9 +29,8 @@
 </template>
 
 <script>
-import { post } from '../../request/http'
+import { post, uploadFile } from '../../request/http'
 import { mapState } from 'vuex'
-import axios from 'axios'
 export default {
   name: 'submitform',
   data () {
@@ -55,16 +54,18 @@ export default {
     handleUpload () {
       let formData = new FormData()
       formData.append('file', this.$refs.upload.files[0])
-      axios.post('https://www.hut-idea.top/resources/upload', formData)
+      uploadFile('/resources/upload', formData)
         .then(res => {
-          // console.log(res)
-          res = res.data
           setTimeout(() => {
             this.uploadPics = res.data
-          }, 1000)
+          }, 500)
         })
         .catch(err => {
-          console.log(err)
+          console.log('文件上传失败', err)
+          this.$message({
+            messsage: '上传失败',
+            type: 'error'
+          })
         })
     },
     onSubmit () {

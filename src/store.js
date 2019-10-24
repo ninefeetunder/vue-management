@@ -25,6 +25,12 @@ export default new Vuex.Store({
       state.id = ''
       state.headPic = ''
       state.username = ''
+    },
+    initStateValue (state) {
+      state.token = localStorage.getItem('token')
+      state.id = localStorage.getItem('id')
+      state.userHeadPic = localStorage.getItem('headPic')
+      state.username = localStorage.getItem('username')
     }
   }
 })

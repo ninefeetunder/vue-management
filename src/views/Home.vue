@@ -54,7 +54,9 @@
     <!-- 侧边栏显示的内容 -->
     <main class="content-container">
       <Animation>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </Animation>
     </main>
   </div>
@@ -117,7 +119,7 @@ export default {
     handleLogout () {
       localStorage.clear()
       this.clearUserInfo()
-      console.log(1)
+      console.log('用户注销')
       this.$router.replace('/login')
     },
     ...mapMutations(['clearUserInfo'])
