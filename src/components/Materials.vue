@@ -45,6 +45,10 @@
             size="mini"
             type="danger"
             @click="handleMaterialsDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button
+            size="mini"
+            type="primary"
+            @click="handleMaterialsTop(scope.$index, scope.row)">置顶</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -115,6 +119,29 @@ export default {
         })
         .catch(err => {
           console.log(err)
+        })
+    },
+    handleMaterialsTop (index, item) {
+      let toppingData = {
+        dataId: item.id,
+        id: this.id,
+        token: this.token
+      }
+      post('api/data', toppingData)
+        .then(res => {
+          if (res.code === 200) {
+            this.$notify({
+              title: '置顶成功',
+              type: 'success'
+            })
+          }
+        })
+        .catch(err => {
+          this.$notify({
+            title: '置顶失败',
+            type: 'warning'
+          })
+          console.log('资源文件置顶失败', err)
         })
     },
     handleChangePage (page) {

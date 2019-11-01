@@ -10,6 +10,6 @@
   -moz-osx-font-smoothing grayscale
   .option-button // 右下角按钮样式
     position: fixed
-    right: 30px
+    right: 320px
     bottom: 3px
 </style>

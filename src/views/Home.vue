@@ -106,6 +106,11 @@ export default {
               content: '敏感字屏蔽',
               route: '/home/shield',
               id: 10
+            },
+            {
+              content: '轮播图控制',
+              route: '/home/swiper',
+              id: 11
             }
           ]
         }
@@ -161,11 +166,11 @@ export default {
       width: 40px
       height: 40px
       border-radius: 50%
-      background: url('https://c-ssl.duitang.com/uploads/item/201505/06/20150506213201_SsGic.thumb.700_0.jpeg') no-repeat center center
       background-size: cover
       .head-img
         height: 100%
         width: 100%
+        border-radius: 100%
     .user
       overflow: hidden
       text-overflow: ellipsis

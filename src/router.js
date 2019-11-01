@@ -11,6 +11,7 @@ import Materials from './components/Materials'
 import Activity from './components/Activity'
 import Message from './components/Message'
 import Shield from './components/Shield'
+import Swiper from './components/Swiper'
 
 Vue.use(Router)
 
@@ -108,6 +109,14 @@ export default new Router({
           path: 'shield',
           component: Shield,
           name: 'shield',
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'swiper',
+          component: Swiper,
+          name: 'swiper',
           meta: {
             requireAuth: true
           }
