@@ -4,7 +4,7 @@
       <h2>当前展示图片</h2>
       <el-carousel width="500px">
         <el-carousel-item v-for="item in showSwiperList" :key="item.uid">
-          <img :src="item.url" alt="">
+          <img :src="item.url" class="swiper-img" alt="">
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -106,7 +106,7 @@ export default {
         })
     },
     handleRemove (file, flieList) {
-      let index = 0;
+      let index = 0
       for (let i in this.fileList) {
         if (this.fileList[i].uid === file.uid) {
           index = i
@@ -123,6 +123,8 @@ export default {
   width: 500px
   .show-swiper
       margin-bottom: 30px
+      .swiper-img
+        width: 100%
 .upload-container
   position: relative
   display: inline-block
